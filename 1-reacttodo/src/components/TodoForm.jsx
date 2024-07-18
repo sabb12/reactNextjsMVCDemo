@@ -5,12 +5,20 @@ export default function TodoForm({ onAddTodo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddTodo({
-      id: Date.now(),
-      text: newTodo,
-      completed: false,
-    });
-    setNewTodo("");
+    if (newTodo.trim()) {
+      onAddTodo({
+        id: Date.now(),
+        text: newTodo,
+        completed: false,
+      });
+      setNewTodo("");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -18,12 +26,11 @@ export default function TodoForm({ onAddTodo }) {
       <input
         type="text"
         value={newTodo}
-        onChange={(e) => {
-          setNewTodo(e.target.value);
-        }}
-        placeholder="오늘 할 일 추가 하세요!"
+        onChange={(e) => setNewTodo(e.target.value)}
+        onKeyPress={handleKeyPress}
+        placeholder="Add a new todo"
       />
-      <button type="submit">추가</button>
+      <button type="submit">Add Todo</button>
     </form>
   );
 }
