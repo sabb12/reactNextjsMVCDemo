@@ -3,7 +3,7 @@ import TodoItem from "./TodoItem";
 
 export default function TodoList({ todos, onToggle, onDelete, onUpdate }) {
   return (
-    <div className="todoList">
+    <div className="todoContent">
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
